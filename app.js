@@ -1,0 +1,15 @@
+const express = require('express');
+const dotenv = require('dotenv');
+const authRoutes = require('./routes/authRoutes');
+const movieRoutes = require('./routes/movieRoutes');
+const logger = require('./middlewares/logger');
+const errorHandler = require('./middlewares/errorHandler');
+dotenv.config();
+const app = express();
+app.use(express.json());
+app.use(logger);
+app.use('/api/auth', authRoutes);
+app.use('/api/movies', movieRoutes);
+app.use(errorHandler);
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));

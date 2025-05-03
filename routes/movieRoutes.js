@@ -1,0 +1,10 @@
+const express = require('express');
+const router = express.Router();
+const movieController = require('../controllers/movieController');
+const authMiddleware = require('../middlewares/authMiddleware');
+router.get('/', movieController.getAllMovies);
+router.post('/', authMiddleware, movieController.addMovie);
+router.put('/:id', authMiddleware, movieController.updateMovie);
+router.patch('/:id', authMiddleware, movieController.partialUpdateMovie);
+router.delete('/:id', authMiddleware, movieController.deleteMovie);
+module.exports = router;
